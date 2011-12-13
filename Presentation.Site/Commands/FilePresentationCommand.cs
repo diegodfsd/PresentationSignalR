@@ -17,15 +17,30 @@ namespace Projector.Site.Commands
 
         public int Execute(Presentation model)
         {
-            var fileName = string.Concat(model.Id, Path.GetExtension(httpPostedFile.FileName));
-            httpPostedFile.SaveAs(GetSlidesDirectory(model.Id, fileName));
+            CreateSlidesDirectory(model.Id);
+            var fileName = string.Concat(model.Permanent, Path.GetExtension(httpPostedFile.FileName));
+            httpPostedFile.SaveAs(GetFullPath(model.Id, fileName));
             return 0;
         }
 
-        private string GetSlidesDirectory(Guid presentationId, string fileName)
+        private void CreateSlidesDirectory(Guid presentationId)
+        {
+            var directory = GetSlidesDirectory(presentationId);
+            if(!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+        }
+
+        private string GetSlidesDirectory(Guid presentationId)
         {
             var directory = HttpContext.Current.Server.MapPath(root);
-            return Path.Combine(directory, presentationId.ToString(), fileName);
+            return Path.Combine(directory, presentationId.ToString());
+        }
+
+        private string GetFullPath(Guid presentationId, string fileName)
+        {
+            return Path.Combine(GetSlidesDirectory(presentationId), fileName);
         }
     }
 }

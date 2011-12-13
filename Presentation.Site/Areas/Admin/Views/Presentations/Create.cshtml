@@ -9,7 +9,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm("Create", "Presentation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Presentations", FormMethod.Post, new { area = "admin", enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
@@ -27,8 +27,16 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description)
             @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Presentation")
+        </div>
+        <div class="editor-field">
+            <input type="file" name="PresentationFile" />
+            @Html.ValidationMessageFor(model => model.PresentationFile)
         </div>
 
         <p>

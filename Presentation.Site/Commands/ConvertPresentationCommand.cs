@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using Projector.Site.Models;
 
@@ -12,16 +13,21 @@ namespace Projector.Site.Commands
         public int Execute(Presentation model)
         {
             var directory = GetSlidesDirectory(model.Id);
-            var command = new StringBuilder();
-            command.AppendFormat("cd {0} && ", directory)
-                .Append("gswin32c -q ")
-                .Append("-sDEVICE=pngalpha ")
-                .Append("-dNOPAUSE ")
-                .Append("-dBATCH ")
-                .AppendFormat("-sOutputFile=\"slide%d.png\" \"{0}.pdf\" ", model.Id)
-                .Append("&& dir /b | find /c \".png\"");
+            var command = GetCommand(directory, model.Permanent);
 
-            return Run(command.ToString());
+            return Run(command);
+        }
+
+        private string GetCommand(string directory, string permanent)
+        {
+            var commands = new[]
+                               {
+                                   "cd " + directory,
+                                   "gswin32c -q -sDEVICE=pngalpha -dNOPAUSE -dBATCH -sOutputFile=\"slide%d.png\" \""+ permanent +"\".pdf",
+                                   "dir /b | find /c \".png\""
+                               };
+
+            return string.Join(" && ", commands);
         }
 
         private int Run(string command)
@@ -36,7 +42,13 @@ namespace Projector.Site.Commands
             while (!process.HasExited)
             { }
 
-            return Convert.ToInt32(result.ReadToEnd());
+            var output = result.ReadToEnd();
+            return Count(output);
+        }
+
+        private int Count(string output)
+        {
+            return Convert.ToInt32(Regex.Replace(output, @"[^(\d)]+/g", ""));
         }
 
         private string GetSlidesDirectory(Guid id)

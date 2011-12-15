@@ -33,7 +33,6 @@ namespace Projector.Site.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(PresentationFormViewModel presentationForm)
         {
-            //TODO:preciso remover a pasta /slides do git
             if(ModelState.IsValid)
             {
                 var presentation = new Presentation
@@ -42,10 +41,10 @@ namespace Projector.Site.Areas.Admin.Controllers
                                            Description = presentationForm.Description
                                        };
 
-                presentation.QtdSlides = commandHandler
+                commandHandler
                     .Add(new FilePresentationCommand(presentationForm.PresentationFile))
                     .Add(new ConvertPresentationCommand())
-                    .Process(presentation).Last();
+                    .Process(presentation, (returns) => presentation.QtdSlides = returns.Last());
 
                 presentations.Add(presentation);
 

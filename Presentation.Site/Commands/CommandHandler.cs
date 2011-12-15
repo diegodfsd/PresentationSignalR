@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Projector.Site.Commands
@@ -7,7 +8,7 @@ namespace Projector.Site.Commands
         where TModel : class
     {
         ICommandHandler<TModel> Add(ICommand<TModel> command);
-        IEnumerable<int> Process(TModel model);
+        void Process(TModel model, Action<IList<int>> @action);
     }
 
     public class CommandHandler<TModel> : ICommandHandler<TModel> 
@@ -26,14 +27,17 @@ namespace Projector.Site.Commands
             return this;
         }
 
-        public IEnumerable<int> Process(TModel model)
+        public void Process(TModel model, Action<IList<int>> @action)
         {
             ICommand<TModel> command;
+            IList<int> returns = new List<int>();
             while (commands.Any())
             {
                 command = commands.Dequeue();
-                yield return command.Execute(model);
+                returns.Add(command.Execute(model));
             }
+
+            @action(returns);
         }
     }
 }

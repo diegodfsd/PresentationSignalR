@@ -23,7 +23,16 @@
         @Html.DisplayFor(model => model.Description)
     </div>
 </fieldset>
+
+<h2>Slides</h2>
+<ul id="container-slides">
+    @for (int i = 1; i <= Model.QtdSlides; i++)
+    {
+        <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, i))" /></li>
+    }
+</ul>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

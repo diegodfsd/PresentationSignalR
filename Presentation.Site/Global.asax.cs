@@ -22,7 +22,6 @@ namespace Projector.Site
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Presentation", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-
         }
 
         protected void Application_Start()

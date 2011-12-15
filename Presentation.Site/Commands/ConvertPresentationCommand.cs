@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Projector.Site.Models;
@@ -13,12 +12,12 @@ namespace Projector.Site.Commands
         public int Execute(Presentation model)
         {
             var directory = GetSlidesDirectory(model.Id);
-            var command = GetCommand(directory, model.Permanent);
+            var command = CreateCommand(directory, model.Permanent);
 
             return Run(command);
         }
 
-        private string GetCommand(string directory, string permanent)
+        private string CreateCommand(string directory, string permanent)
         {
             var commands = new[]
                                {

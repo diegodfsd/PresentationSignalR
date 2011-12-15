@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AttendeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PresentationsController.cs" />
     <Compile Include="Areas\Admin\Models\PresentationFormViewModel.cs" />
     <Compile Include="Commands\CommandHandler.cs" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Attendees\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,14 @@
+*
+{
+    margin:0;
+    padding:0;
+    }
+    
+ul
+{
+    list-style-type: none;
+    }
+
 body
 {
     font-size: .85em;
@@ -73,3 +84,15 @@ textarea
 {
     display: none;
 }
+
+#container-slides li
+{
+    display:inline-block;
+    margin:10px;
+    }
+
+    #container-slides li img
+    {
+        width:250px;
+        height:250px;
+        }

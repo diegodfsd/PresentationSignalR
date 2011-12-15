@@ -7,6 +7,7 @@ obj/*
 bin/*
 release/*
 debug/*
+slides/*
 .svn
 *.tmp
 *.user

@@ -24,15 +24,51 @@
     </div>
 </fieldset>
 
-<h2>Slides</h2>
-<ul id="container-slides">
-    @for (int i = 1; i <= Model.QtdSlides; i++)
-    {
-        <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, i))" /></li>
-    }
-</ul>
+<div>
+    <ul id="tabs">
+        <li class="selected"><a href="#tabs-slides">Slides</a></li>
+        <li><a href="#tabs-attendees">Attendees</a></li>
+    </ul>
+    
+    <div id="tabs-container">
+        <div id="tabs-slides">
+            <h2>Slides</h2>
+            <div>
+                <ul id="container-slides">
+                    @for (int i = 1; i <= Model.QtdSlides; i++)
+                    {
+                        <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, i))" /></li>
+                    }
+                </ul>
+            </div>
+        </div>
 
-<p>
+        <div id="tabs-attendees">
+            <h2>Attendees</h2>
+            <a href="@Url.RouteUrl("Admin_attendee", new { presentationid = @Model.Id, action = "Add" })">Add Attendde</a>
+            <div>
+                <ul>
+                    @foreach (var attendee in Model.Attendees)
+                    {
+                        <li class="@attendee.Speaker? speaker : attendee">
+                            <img src="@attendee.GravatarUrl" alt="@attendee.Name" />
+                            <span>@attendee.Name</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p class="container-botoes">
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tabs").tabs();
+    });
+</script>

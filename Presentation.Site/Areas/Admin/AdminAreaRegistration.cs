@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Projector.Site.Areas.Admin
 {
@@ -16,8 +17,9 @@ namespace Projector.Site.Areas.Admin
         {
             context.MapRoute(
                 "Admin_attendee",
-                "Admin/Presentations/{presentationid}/Attendees/{action}/{id}",
-                new { controller = "Attendees", presentationid = "", action = "Index", id = UrlParameter.Optional}
+                "Admin/Presentations/{presentationid}/Attendees/{action}",
+                new { controller = "Attendees", action = "Index", presentationid = Guid.Empty },
+                new { presentationid = @"[\w-]+" }
             );
 
             context.MapRoute(

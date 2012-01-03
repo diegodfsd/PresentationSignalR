@@ -1,16 +1,13 @@
-*
-{
+*{
     margin:0;
     padding:0;
     }
     
-ul
-{
+ul{
     list-style-type: none;
     }
 
-body
-{
+body{
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
@@ -27,32 +24,27 @@ section {
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
-fieldset 
-{
+fieldset{
     border:1px solid #ddd;
     padding:0 1.4em 1.4em 1.4em;
     margin:0 0 1.5em 0;
 }
 
-legend 
-{
+legend{
     font-size:1.2em;
     font-weight: bold;
 }
 
-textarea 
-{
+textarea{
     min-height: 75px;
 }
 
-.editor-label 
-{
+.editor-label{
     margin: 1em 0 0 0;
 }
 
-.editor-field 
-{
-    margin:0.5em 0 0 0;
+.editor-field{
+    margin:0.5em 0 0 0;r
 }
 
 
@@ -85,6 +77,28 @@ textarea
     display: none;
 }
 
+#main-container
+{
+    margin:15px;
+    }
+
+#tabs li
+{
+    display:inline-block;    
+    border:solid 1px #c0c0c0;
+    border-bottom:0;
+    border-top-left-radius:10px;
+    -webkit-box-shadow:-2px -2px 5px #c0c0c0;
+    padding:10px;
+    }
+    
+#tabs-container
+{
+    border:solid 1px #c0c0c0;
+    -webkit-box-shadow:2px 2px 5px #c0c0c0;
+    padding:10px;
+    }
+
 #container-slides li
 {
     display:inline-block;
@@ -96,3 +110,8 @@ textarea
         width:250px;
         height:250px;
         }
+        
+.container-botoes
+{
+    margin-top:10px;
+    }

@@ -9,6 +9,7 @@ release/*
 debug/*
 Slides/*
 Slides
+*/Slides
 .svn
 *.tmp
 *.user

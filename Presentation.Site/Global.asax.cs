@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
+using Projector.Site.Helpers.ModelBinders;
 
 namespace Projector.Site
 {
@@ -28,8 +30,17 @@ namespace Projector.Site
         {
             AreaRegistration.RegisterAllAreas();
 
+            InitializeModelBinders();
+
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        private void InitializeModelBinders()
+        {
+            ModelBinders
+                .Binders
+                .Add(typeof(Guid), new GuidModelBinder());
         }
     }
 }

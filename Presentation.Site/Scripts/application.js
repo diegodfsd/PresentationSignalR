@@ -1,35 +1,49 @@
 ﻿(function ($) {
     $.fn.extend({
-        tabs: function () {
-            var items;
-            items = $("a", this);
+        simpletabs: function () {
+            var items = []
+              , links = $("a", this);
 
-            var collapse = function () {
-                items.each(function () {
-                    toggle($(this), false);
+            $.each(links, function (i) {
+                items.push({
+                    anchor: $(this),
+                    view: $(this).attr("href"),
+                    show: function () {
+                        $(this.view).show();
+                    },
+                    hide: function () {
+                        $(this.view).hide();
+                    }
+                });
+            });
+
+
+            var view = function () { };
+            view.collapse = function () {
+                $.each(items, function () {
+                    this.hide();
                 });
             };
 
-            var toggle = function (anchor, show) {
-                $(anchor.attr('href'))[show ? "show" : "hide"]();
-            };
-
-            var handle = function () {
-                items.each(function () {
-                    $(this).click(function () {
-                        collapse();
-                        toggle($(this), true);
+            view.handler = function () {
+                var self = this;
+                $.each(items, function (i) {
+                    $(this.anchor).click(function () {
+                        self.collapse();
+                        (function (index) {
+                            items[index].show();
+                        })(i);
                     });
                 });
             };
 
-            var init = function () {
-                handle();
-                collapse();
-                $(items[0]).trigger('click');
-            }
+            view.init = function () {
+                this.handler();
+                this.collapse();
+                items[0].show();
+            };
 
-            init();
+            view.init();
         }
     });
 })(jQuery);

@@ -65,7 +65,7 @@ namespace Projector.Site.Repositories.Contract
 
         public void Update<T>(T item) where T : class, new()
         {
-            Db.GetCollection<T>().UpdateOne(item, item);
+            Db.GetCollection<T>().Save(item);//.UpdateOne(item, item);
         }
 
         //Helper for using map reduce in mongo

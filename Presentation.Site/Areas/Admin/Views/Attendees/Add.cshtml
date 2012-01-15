@@ -1,0 +1,49 @@
+﻿@model Projector.Site.Areas.Admin.Models.AttendeeFormModel
+@{
+    ViewBag.Title = "Attendees";
+}
+
+<h2>Add attendees to presentation: @Model.Title</h2>
+@using(Html.BeginForm()){
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <p>
+            @Html.HiddenFor(a => a.presentationId)
+        </p>
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(a => a.Name)
+            @Html.ValidationMessageFor(a => a.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(a => a.Email)
+            @Html.ValidationMessageFor(a => a.Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(a => a.Password)
+            @Html.ValidationMessageFor(a => a.Password)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Speaker)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(a => a.Speaker)
+        </div>
+    
+        <p>
+            <input type="submit" value="Add" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back", "Details", "Presentations", new { id = Model.presentationId }, null)
+</div>

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Projector.Site.Areas.Admin.Models;
 using Projector.Site.Models;
 using Projector.Site.Repositories.Contract;
 
@@ -17,10 +15,35 @@ namespace Projector.Site.Areas.Admin.Controllers
             presentations = new Repository<Presentation>();
         }
 
-        public ActionResult Index(Guid presentationid)
+        public ActionResult Add(Guid presentationid)
         {
             var presentation = presentations.FindOne(p => p.Id == presentationid);
-            return View(presentation);
+            var attendeeFormModel = new AttendeeFormModel(presentation.Id, presentation.Title);
+            
+            return View(attendeeFormModel);
+        }
+
+        [HttpPost]
+        public ActionResult Add(AttendeeFormModel attendeeFormModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var presentation = presentations.FindOne(p => p.Id == attendeeFormModel.presentationId);
+                var attendee = new Attendee
+                                   {
+                                       Name = attendeeFormModel.Name,
+                                       Email = attendeeFormModel.Email,
+                                       Password = attendeeFormModel.Password,
+                                       Speaker = attendeeFormModel.Speaker
+                                   };
+
+                presentation.AddAttendee(attendee);
+                presentations.Update(presentation);
+
+                return RedirectToAction("Details", "Presentations", new { id = presentation.Id });
+            }
+
+            return View(attendeeFormModel);
         }
     }
 }

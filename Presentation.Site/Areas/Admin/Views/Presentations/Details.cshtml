@@ -26,7 +26,7 @@
 
 <div>
     <ul id="tabs">
-        <li class="selected"><a href="#tabs-slides">Slides</a></li>
+        <li><a href="#tabs-slides">Slides</a></li>
         <li><a href="#tabs-attendees">Attendees</a></li>
     </ul>
     
@@ -46,13 +46,13 @@
         <div id="tabs-attendees">
             <h2>Attendees</h2>
             <a href="@Url.RouteUrl("Admin_attendee", new { presentationid = @Model.Id, action = "Add" })">Add Attendde</a>
-            <div>
+            <div class="container-attendees">
                 <ul>
                     @foreach (var attendee in Model.Attendees)
                     {
-                        <li class="@attendee.Speaker? speaker : attendee">
+                        <li class="@(attendee.Speaker ? "speaker" : "attendee")">
                             <img src="@attendee.GravatarUrl" alt="@attendee.Name" />
-                            <span>@attendee.Name</span>
+                            <a  href="mailto:@attendee.Email">@attendee.Name</a>
                         </li>
                     }
                 </ul>
@@ -69,6 +69,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#tabs").tabs();
+        $("#tabs").simpletabs();
     });
 </script>

@@ -32,7 +32,7 @@ namespace Projector.Site.Models
 
         public void AddAttendee(Attendee attendee)
         {
-            if (attendees.Any(attendee.Equals))
+            if (!attendees.Any(attendee.Equals))
             {
                 attendees.Add(attendee);
             }

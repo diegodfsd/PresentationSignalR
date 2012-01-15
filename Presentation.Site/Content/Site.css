@@ -47,6 +47,11 @@ textarea{
     margin:0.5em 0 0 0;r
 }
 
+input[type="submit"]
+{
+    padding:10px;
+    }
+
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -115,3 +120,28 @@ textarea{
 {
     margin-top:10px;
     }
+    
+.container-attendees
+{
+    margin:10px;
+    }
+    
+    .container-attendees ul li
+    {
+        margin:5px;
+        }
+
+.attendee img, .speaker img
+{
+    margin-right:6px;
+    }
+    
+.attendee img
+{
+    -webkit-box-shadow:2px 2px #c0c0c0;
+    }
+    
+.speaker img
+{
+    -webkit-box-shadow:2px 2px #F5B811;
+    } 

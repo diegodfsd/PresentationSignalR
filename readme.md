@@ -1,4 +1,4 @@
-Descrição
+Description
 ===============
 
-É um projeto experimental para demonstrar o uso do framework SignalR
+This is a project using SignalR framework to create with an application like SlideShare, but multiuser and with chat.

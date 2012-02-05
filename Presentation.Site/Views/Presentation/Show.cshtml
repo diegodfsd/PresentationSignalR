@@ -6,7 +6,7 @@
 
 <div id="presentation-slides">
     <ul>
-        @foreach (var slide in ViewBag.Presentation.QtdSlides)
+        @for (var slide = 1; slide < Model.QtdSlides; slide++ )
         {
             <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", ViewBag.Presentation.Id, slide))" /></li>
         }

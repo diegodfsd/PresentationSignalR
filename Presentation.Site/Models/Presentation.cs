@@ -10,13 +10,9 @@ namespace Projector.Site.Models
     {
         private readonly IList<Attendee> attendees;
 
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        [MongoIgnore]
-        public string Permanent
-        {
-            get { return Regex.Replace(Title, @"[^(\w|0-9)]+", ""); }
-        }
+        public Guid Id { get; protected set; }
+        public string Title { get; protected set; }
+        public string Permanent { get; protected set; }
         [MongoIgnore]
         public Attendee Speaker
         {
@@ -31,7 +27,14 @@ namespace Projector.Site.Models
         }
 
         public Presentation()
+        {}
+
+        public Presentation(string title, string description)
+            : this()
         {
+            Title = title;
+            Description = description;
+            Permanent = Regex.Replace(Title, @"[^(\w|0-9)]+", "");
             Id =  Guid.NewGuid();
             attendees = new List<Attendee>();
         }

@@ -35,12 +35,7 @@ namespace Projector.Site.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                var presentation = new Presentation
-                                       {
-                                           Title = presentationForm.Title,
-                                           Description = presentationForm.Description
-                                       };
-
+                var presentation = new Presentation(presentationForm.Title, presentationForm.Description);
                 commandHandler
                     .Add(new FilePresentationCommand(presentationForm.PresentationFile))
                     .Add(new ConvertPresentationCommand())

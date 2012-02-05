@@ -31,7 +31,7 @@ namespace Projector.Site.Repositories.Contract
 
         public TModel FindOne(Expression<Func<TModel, bool>> expression)
         {
-            return session.Single(expression);
+            return session.All<TModel>().SingleOrDefault(expression);
         }
 
         public IQueryable<TModel> All()

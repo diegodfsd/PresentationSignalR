@@ -24,11 +24,12 @@ namespace Projector.Site.Controllers
             return View(all);
         }
 
+        [Authorize]
         public ActionResult Show(string permanent)
         {
             var identity = (PresentationIdentity)User.Identity;
             var presenteation = presentations
-                .FindOne(p => p.Permanent.Equals(permanent));
+                .FindOne(p => p.Permanent == permanent);
             
             var attendee = presenteation
                 .Attendees

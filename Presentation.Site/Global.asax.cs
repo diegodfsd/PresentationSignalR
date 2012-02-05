@@ -21,7 +21,7 @@ namespace Projector.Site
 
             routes.MapRoute(
                 "Presentation_view",
-                "{controller}/{id}",
+                "Presentation/{id}",
                 new { controller = "Presentation", action = "Show" }
                 );
 

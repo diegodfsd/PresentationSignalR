@@ -1,24 +1,22 @@
-﻿@model dynamic
-
-@{
-    ViewBag.Title = @Model.Presentation.Title;
+﻿@{
+    ViewBag.Title = ViewBag.Presentation.Title;
 }
 
-<h2>@Model.Title</h2>
+<h2>@ViewBag.Presentation.Title</h2>
 
 <div id="presentation-slides">
     <ul>
-        @foreach (var slide in Model.Presentation.QtdSlides)
+        @foreach (var slide in ViewBag.Presentation.QtdSlides)
         {
-            <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, slide))" /></li>
+            <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", ViewBag.Presentation.Id, slide))" /></li>
         }
     </ul>
     
-    @if(Model.Attendee.Speaker)
+    @if (ViewBag.Attendee.Speaker)
     {
         <div id="controls">
             <li><a>Previous</a></li>
-            <li><strong id="current">0</strong>/@Model.Presentation.QtdSlides</li>
+            <li><strong id="current">0</strong>/@ViewBag.Presentation.QtdSlides</li>
             <li><a>Next</a></li>
         </div>
     }

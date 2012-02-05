@@ -34,11 +34,10 @@ namespace Projector.Site.Controllers
                 .Attendees
                 .SingleOrDefault(a => a.Email.Equals(identity.UserName));
 
-            dynamic presentationView = new ExpandoObject();
-            presentationView.Presentation = presenteation;
-            presentationView.Attendee = attendee;
+            ViewBag.Presentation = presenteation;
+            ViewBag.Attendee = attendee;
 
-            return View(presentationView);
+            return View();
         }
     }
 }

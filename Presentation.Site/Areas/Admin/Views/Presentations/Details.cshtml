@@ -35,9 +35,9 @@
             <h2>Slides</h2>
             <div>
                 <ul id="container-slides">
-                    @for (int i = 1; i <= Model.QtdSlides; i++)
+                    @foreach (var slide in Model.QtdSlides)
                     {
-                        <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, i))" /></li>
+                        <li><img src="@Url.Content(string.Format("~/Slides/{0}/slide{1}.png", Model.Id, slide))" /></li>
                     }
                 </ul>
             </div>

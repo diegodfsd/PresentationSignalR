@@ -17,6 +17,12 @@ namespace Projector.Site.Models
         {
             get { return Regex.Replace(Title, @"[^(\w|0-9)]+", ""); }
         }
+        [MongoIgnore]
+        public Attendee Speaker
+        {
+            get
+            { return attendees.SingleOrDefault(attendee => attendee.Speaker); }
+        }
         public string Description { get; set; }
         public int QtdSlides { get; set; }
         public IEnumerable<Attendee> Attendees
@@ -26,7 +32,7 @@ namespace Projector.Site.Models
 
         public Presentation()
         {
-            Id = Guid.NewGuid();
+            Id =  Guid.NewGuid();
             attendees = new List<Attendee>();
         }
 
@@ -36,6 +42,14 @@ namespace Projector.Site.Models
             {
                 attendees.Add(attendee);
             }
+        }
+
+        public bool SpeakerIs(Guid attendeId)
+        {
+            var speaker = Speaker;
+
+            return speaker != null 
+                ? speaker.Speaker : false;
         }
     }
 }

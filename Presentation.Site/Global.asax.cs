@@ -20,6 +20,12 @@ namespace Projector.Site
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Presentation_view",
+                "{controller}/{id}",
+                new { controller = "Presentation", action = "Show" }
+                );
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Presentation", action = "Index", id = UrlParameter.Optional } // Parameter defaults

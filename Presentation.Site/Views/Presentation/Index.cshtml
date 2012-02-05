@@ -1,5 +1,15 @@
-﻿@{
+﻿@model IEnumerable<Projector.Site.Models.Presentation>
+
+@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Presentations</h2>
+<ul>
+    @foreach (var presentation in Model)
+    { 
+        <li>
+            <a href="@Url.RouteUrl("Presentation_view", new { id = presentation.Permanent })">@presentation.Title</a>
+        </li>
+    }
+</ul>
